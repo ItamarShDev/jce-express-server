@@ -1,0 +1,38 @@
+#container{
+/*    position: absolute;*/
+    top:10vh;
+    min-width: 100%;
+    height: 100vh;
+    margin:  0 auto;
+}
+
+#main-container{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top:0;
+}
+#form{
+    position: absolute;
+    top:150px;
+    width: 80%;
+    margin: 20% 10%;
+}
+.nav-wrapper{
+    background-color: white !important;
+}
+i.material-icons{
+    color:black !important;
+}
+nav, .nav-wrapper{
+    border-radius: 5px;
+}
+#sun{
+    width: 100%;
+    height: 33%;
+}
+#sun div{
+    width: 100%;
+    display: block;
+    margin: 10px auto;
+}
