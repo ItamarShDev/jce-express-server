@@ -5,11 +5,16 @@ Working on azure
 
 > [Login Page](http://testappjce.azurewebsites.net/home#/login)
 
+##wiki
+
+>please look at the wiki to get folder and files explanations
+
+
 
 #ABOUT
-client server example
-includes:
-* express
-* mongoose
-* node
-* angularjs
+
+client server example includes:
+* Expressjs
+* Mongoose - Mongodb library for Node.
+* Node.js
+* Angularjs
