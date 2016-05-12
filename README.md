@@ -7,7 +7,7 @@ Working on azure
 
 ##wiki
 
->please look at the wiki to get folder and files explanations
+>please look at the [wiki](https://github.com/ItamarShDev/jce-express-server/wiki) to get folder and files explanations
 
 
 
