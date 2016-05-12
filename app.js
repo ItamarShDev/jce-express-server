@@ -12,7 +12,8 @@ var config = require('config.json')('config/config.json'); //get config json
 var Schema = mongoose.Schema; //to create Schema
 var db = config.db;
 var mongoAddr = db.mongodb;
-var mongoAddress = 'mongodb://' + db.user + ':' + db.password + mongoAddr.host + ':' + mongoAddr.port + '/' + db.appName;
+var mongoAddress = 'mongodb://' + db.user + ':' + db.password +'@'+ mongoAddr.host + ':' + mongoAddr.port + '/' + db.appName;
+console.log("Mongo Address", mongoAddress);
 var connection = mongoose.createConnection(mongoAddress); //connect to the db server
 //Schema = document
 var users = new Schema({
@@ -20,14 +21,13 @@ var users = new Schema({
   sureName: String
 });
 var User = connection.model('User', users);
-module.exports = User;
+exports.User = User;
 /**
  * System Routes
  * routes - API calls
  * users = the user API
  * home - not used for now
  */
-var routes = require('./routes/index');
 var users = require('./routes/users');
 var home = require('./routes/home');
 
@@ -54,7 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
  * when in '/' use both routes, and users
  * when in '/home' use home
  */
-app.use('/route', routes);
 app.use('/', users);
 app.use('/home', home);
 

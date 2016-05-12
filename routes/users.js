@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var User = require('User');
+var app = require('../app');
+var User = app.User;
 /*
  *DATA BASE
  */
