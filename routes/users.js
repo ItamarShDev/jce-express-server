@@ -20,7 +20,7 @@ router.post('/reg', function(req, res) {
     var userJson = {
         name: js.name,
         sureName: js.surename
-    }
+    };
 
     var user = new User(userJson); //create new db instance
     //save the new user to db
