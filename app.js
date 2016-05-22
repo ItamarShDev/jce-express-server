@@ -12,8 +12,9 @@ var config = require('config.json')('config/config.json'); //get config json
 var Schema = mongoose.Schema; //to create Schema
 var db = config.db;
 var mongoAddr = db.mongodb;
-var mongoAddress = 'mongodb://' + db.user + ':' + db.password +'@'+ mongoAddr.host + ':' + mongoAddr.port + '/' + db.appName;
-console.log("Mongo Address", mongoAddress);
+var mongoAddress = 'mongodb://' + db.user + ':' + db.password + '@' + mongoAddr.host + ':' + mongoAddr.port + '/' + db.appName;
+var mongoAdderes = "mongodb://localhost:27017/db";
+console.log("Mongo Address", mongoAdderes);
 var connection = mongoose.createConnection(mongoAddress); //connect to the db server
 //Schema = document
 var users = new Schema({
@@ -48,14 +49,13 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 /*
  * routes
  * when in '/' use both routes, and users
  * when in '/home' use home
  */
 app.use('/', users);
-app.use('/home', home);
+app.use('/', home);
 
 
 /**
