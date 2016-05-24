@@ -14,15 +14,22 @@ var db = config.db;
 var mongoAddr = db.mongodb;
 var mongoAddress = 'mongodb://' + db.user + ':' + db.password + '@' + mongoAddr.host + ':' + mongoAddr.port + '/' + db.appName;
 var mongoAdderes = "mongodb://localhost:27017/db";
-console.log("Mongo Address", mongoAdderes);
+console.log("Mongo Address", mongoAddress);
 var connection = mongoose.createConnection(mongoAddress); //connect to the db server
 //Schema = document
 var users = new Schema({
   name: String,
-  sureName: String
+  sureName: String,
+  mail: String
+});
+var loginUsers = new Schema({
+  name: String,
+  mail: String
 });
 var User = connection.model('User', users);
 exports.User = User;
+var Users = connection.model('Users', loginUsers);
+exports.UsersDB = Users;
 /**
  * System Routes
  * routes - API calls
@@ -31,7 +38,7 @@ exports.User = User;
  */
 var users = require('./routes/users');
 var home = require('./routes/home');
-
+var login = require('./routes/login');
 //create express app
 var app = express();
 
@@ -56,6 +63,8 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 app.use('/', users);
 app.use('/', home);
+app.use('/', login);
+
 
 
 /**

@@ -8,7 +8,6 @@ var User = app.User;
 
 //model = collection
 
-
 /*
  * INNER API CALLS
  */

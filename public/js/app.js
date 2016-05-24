@@ -1,22 +1,22 @@
-(function () {
+(function() {
 
     var app = angular.module('store', ['ngRoute', 'ngAnimate']);
 
-    app.controller('MainController', function ($scope) {
-        this.image = 'images/background.png';
-    })
-        .controller('galleryController', function ($scope) {
+    app.controller('MainController', function($scope) {
+            this.image = 'images/background.png';
+        })
+        .controller('galleryController', function($scope) {
             this.images = images;
         })
-        .service('RestService', function ($http) {
-            var getAllUsers = function () {
+        .service('RestService', function($http) {
+            var getAllUsers = function() {
                 var request = {
                     method: 'GET',
                     url: '/users'
                 };
                 return $http(request);
             };
-            var registerUser = function (userJson) {
+            var registerUser = function(userJson) {
                 var request = {
                     method: 'POST',
                     url: '/reg',
@@ -24,7 +24,7 @@
                 };
                 return $http(request);
             };
-            var deleteUser = function (userJson) {
+            var deleteUser = function(userJson) {
                 var request = {
                     method: 'POST',
                     url: '/delete',
@@ -32,24 +32,42 @@
                 };
                 return $http(request);
             }
+            var login = function(user) {
+                var request = {
+                    method: 'POST',
+                    url: '/login',
+                    data: user
+                };
+                return $http(request);
+            }
 
             return {
+                login: login,
                 getAllUsers: getAllUsers,
                 registerUser: registerUser,
                 deleteUser: deleteUser
             };
         })
-        .controller('formController', function ($scope, RestService) {
+        .controller('formController', function($scope, RestService) {
             $scope.user = {};
+            $scope.toLogin = {};
             $scope.users = {};
-            $scope.getAllUsers = function () {
+            $scope.getAllUsers = function() {
                 RestService.getAllUsers()
-                    .then(function (response) {
+                    .then(function(response) {
                         $scope.users = response.data;
                         $scope.$apply;
                     })
             }
-            $scope.submitForm = function () {
+            $scope.loginCall = function() {
+                console.log($scope.toLogin)
+                RestService.login($scope.toLogin)
+                    .then(function successCallback(response) {
+                        alert('OK');
+                        $scope.toLogin = {};
+                    });
+            };
+            $scope.submitForm = function() {
                 $scope.error = "";
                 RestService.registerUser($scope.user)
                     .then(function successCallback(response) {
@@ -58,15 +76,15 @@
                         $scope.getAllUsers();
                     });
             };
-            $scope.delete = function () {
+            $scope.delete = function() {
                 $scope.error = "";
                 RestService.deleteUser($scope.user)
-                    .then(function (data) {
+                    .then(function(data) {
                         console.log(data.data);
                         $scope.getAllUsers();
                         $scope.user = {};
                     })
-                    .catch(function (data) {
+                    .catch(function(data) {
                         $scope.error = data.data;
                     });
             }
@@ -78,13 +96,16 @@
         '/images/3.jpg'
     ];
 
-
-    app.config(function ($routeProvider, $locationProvider) {
+    app.config(function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/gallery', {
                 templateUrl: 'views/gallery.html',
                 controller: 'galleryController',
                 controllerAs: 'gallery'
+            })
+            .when('/users', {
+                templateUrl: 'views/users.html',
+                controller: 'formController'
             })
             .when('/login', {
                 templateUrl: 'views/login.html',
