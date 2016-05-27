@@ -61,7 +61,7 @@ router.get('/users', function(req, res) {
             userMap[user._id] = user;
         });
         //    return the users object
-        res.end(JSON.stringify(userMap, null, "\t"));
+        res.end(JSON.stringify(userMap));
     });
 });
 

@@ -7,6 +7,23 @@
         })
         .controller('galleryController', function($scope) {
             this.images = images;
+            $scope.cards = [
+                {
+                    headline: "Beach",
+                    image: '/images/1.jpg',
+                    content: 'this is a beautiful beach'
+                },
+                {
+                    headline: "snow",
+                    image: '/images/1.jpg',
+                    content: 'this is a beautiful ski slope'
+                },
+                {
+                    headline: "field",
+                    image: '/images/1.jpg',
+                    content: 'this is a beautiful field'
+                }
+            ]
         })
         .service('RestService', function($http) {
             var getAllUsers = function() {
@@ -65,6 +82,7 @@
                     .then(function successCallback(response) {
                         alert('OK');
                         $scope.toLogin = {};
+                        console.log(response.data)
                     });
             };
             $scope.submitForm = function() {
